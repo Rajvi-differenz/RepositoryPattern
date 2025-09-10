@@ -1,8 +1,6 @@
-﻿using RepositoryPattern.Models;
-using RepositoryPattern.Repositories;
-using Microsoft.AspNetCore.Mvc;
-using RepositoryPattern.Models.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using RepositoryPattern.Models;
+using RepositoryPattern.Models.Data;
 using RepositoryPattern.Repositories;
 
 namespace RepositoryPattern.Controllers
@@ -19,6 +17,12 @@ namespace RepositoryPattern.Controllers
             _userRepo = userRepo;
             _context = context;
         }
+
+        public IActionResult GetUser()
+        {
+            return Ok("Hello User")
+        }   // ❌ missing semicolon
+
         //this is getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
