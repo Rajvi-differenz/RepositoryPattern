@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+*.log
+
+# Packages
+*.nupkg
+*.snupkg
+packages/
+*.lock.json
+
+# Others
+*.dbmdl
+*.jfm
