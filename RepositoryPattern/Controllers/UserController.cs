@@ -19,7 +19,7 @@ namespace RepositoryPattern.Controllers
             _userRepo = userRepo;
             _context = context;
         }
-
+        //this is getall
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
