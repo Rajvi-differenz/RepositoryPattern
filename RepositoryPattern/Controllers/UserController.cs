@@ -18,10 +18,6 @@ namespace RepositoryPattern.Controllers
             _context = context;
         }
 
-        public IActionResult GetUser()
-        {
-            return Ok("Hello User")
-        }   // ❌ missing semicolon
 
         //this is getall
         [HttpGet]
@@ -65,7 +61,7 @@ namespace RepositoryPattern.Controllers
 
             _userRepo.Remove(existing);
             await _context.SaveChangesAsync();
-            return NoContent();
+            return NoContent()
         }
     }
 }
