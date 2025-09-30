@@ -9,23 +9,52 @@ on:
       - master
 
 jobs:
+  # Build Job
   build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '8.0.x'   # Use your .NET version
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'   # Use your .NET version
 
-    - name: Restore dependencies
-      run: dotnet restore RepositoryPattern.sln
+      - name: Restore dependencies
+        run: dotnet restore RepositoryPattern.sln
 
-    - name: Build
-      run: dotnet build RepositoryPattern.sln --configuration Release --no-restore
+      - name: Build solution
+        run: dotnet build RepositoryPattern.sln --configuration Release --no-restore
 
-    - name: Run tests
-      run: dotnet test RepositoryPattern.sln --no-build --verbosity normal
+  # Unit Test Job
+  unit-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run Unit Tests
+        run: dotnet test RepositoryPattern.sln --no-build --filter "FullyQualifiedName~UsersControllerTests" --verbosity normal
+
+  # Integration Test Job
+  integration-tests:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Run Integration Tests
+        run: dotnet test RepositoryPattern.sln --no-build --filter "FullyQualifiedName~UsersControllerIntegrationTests" --verbosity normal

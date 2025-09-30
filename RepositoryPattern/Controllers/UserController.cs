@@ -61,7 +61,7 @@ namespace RepositoryPattern.Controllers
 
             _userRepo.Remove(existing);
             await _context.SaveChangesAsync();
-            return NoContent()
+            return NoContent();
         }
     }
 }
